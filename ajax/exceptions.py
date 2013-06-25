@@ -1,6 +1,6 @@
 from django.utils import simplejson as json
 from django.utils.encoding import smart_str
-from django.http import HttpResponse, HttpResponseNotFound, \
+from django.http import HttpResponseNotFound, \
     HttpResponseForbidden, HttpResponseNotAllowed, HttpResponseServerError, \
     HttpResponseBadRequest
 
@@ -36,7 +36,7 @@ class AJAXError(Exception):
             'success': False,
             'data': {
                 'code': self.code,
-                'message': smart_str(self.msg)
+                'message': smart_str(self.msg.decode())
             }
         }
         error.update(self.extra)

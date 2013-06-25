@@ -1,13 +1,9 @@
-from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils import simplejson as json
 from django.utils.encoding import smart_str
 from django.utils.translation import ugettext_lazy as _
-from django.db.models.fields import FieldDoesNotExist
 from ajax.decorators import require_pk
-from ajax.exceptions import AJAXError, AlreadyRegistered, NotRegistered, \
-    PrimaryKeyMissing
+from ajax.exceptions import AJAXError, AlreadyRegistered, NotRegistered
 from ajax.encoders import encoder
 from ajax.signals import ajax_created, ajax_deleted, ajax_updated
 

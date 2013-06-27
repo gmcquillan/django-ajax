@@ -4,6 +4,10 @@ from django.utils.encoding import smart_str
 from django.utils.translation import ugettext_lazy as _
 from ajax.decorators import require_pk
 from ajax.exceptions import AJAXError, AlreadyRegistered, NotRegistered
+from ajax.compat import path_to_import
+
+from django.conf import settings
+
 from ajax.encoders import encoder
 from ajax.signals import ajax_created, ajax_deleted, ajax_updated
 
@@ -196,10 +200,9 @@ class ModelEndpoint(object):
         Most likely you will want to lock down who can edit and delete various
         models. To do this, just override this method in your child class.
         """
-        if request.user.is_authenticated():
-            return True
+        authentication_class = path_to_import(settings.AJAX_AUTHENTICATION)
 
-        return False
+        return authentication_class.is_authenticated()
 
 
 class FormEndpoint(object):

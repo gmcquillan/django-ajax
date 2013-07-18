@@ -36,7 +36,7 @@ class AJAXError(Exception):
             'success': False,
             'data': {
                 'code': self.code,
-                'message': smart_str(self.msg.decode())
+                'message': smart_str('{0}'.format(self.msg).decode())
             }
         }
         error.update(self.extra)
